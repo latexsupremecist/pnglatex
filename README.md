@@ -14,7 +14,7 @@ Download or clone the repository, then type
     # cp pnglatex /usr/bin/pnglatex
 
 ## Dependencies
-`pnglatex` depends on `dvipng`, `imagemagick`, `latex` and `optipng` packages.
+`pnglatex` depends on `dvipng`, `imagemagick`, `latex`, `optipng`, and `xclip` packages.
 
 ## Tips
 You can pipe into `pnglatex`:
