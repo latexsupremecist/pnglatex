@@ -31,7 +31,8 @@ PACKAGES=
 PADDING=
 PNGFILE=
 SHOWVERSION=0
-SILENT=0
+SILENT=1
+SAVE=0
 SIZE=
 TEXFILE=
 declare -r VERSION=0.13
@@ -156,6 +157,13 @@ function generate {
 
     if [ $SILENT -eq 0 ]; then
         readlink -f $PNGFILE
+    fi
+
+    cat $PNGFILE | xclip -selection clipboard -target image/png -i
+    notify-send -i $PNGFILE "pnglatex" "Screenshot copied to Clipboard"
+
+    if [ $SAVE -eq 0 ]; then
+	rm $PNGFILE
     fi
 
     clean
