@@ -37,16 +37,6 @@ SIZE=
 TEXFILE=
 declare -r VERSION=0.13
 
-# Check for dependencies
-#  montanaflynn/check_for_dependencies.sh
-
-checkfor () {
-    command -v $1 >/dev/null 2>&1 || { 
-        echo >&2 "$1 required by pnglatex"; 
-        exit 1; 
-    }
-}
-
 # Add margin, border and padding to the image.
 function box {
     if [ "$PADDING" ]; then
@@ -167,6 +157,7 @@ function generate {
 
     if [ $SILENT -eq 0 ]; then
         readlink -f $PNGFILE
+        xdg-open $PNGFILE
     fi
 
     cat $PNGFILE | xclip -selection clipboard -target image/png -i
@@ -181,15 +172,16 @@ function generate {
 
 # Entry point of the script.
 function main {
-   # if ! exists latex || ! exists dvipng; then
-     #   echo "pnglatex requires latex and dvipng packages." >&2
-      #  exit 1
-   # fi
-    checkfor "dvipng"
-    checkfor "imagemagick"
-    checkfor "latex"
-    checkfor "optipng"
-    
+    if ! exists latex || ! exists dvipng; then
+        echo "pnglatex requires latex and dvipng packages." >&2
+        exit 1
+    fi
+
+    if ! exists xclip; then
+        echo "pnglatex requires xclip package." >&2
+        exit 1
+    fi
+
     properties
     parse "$@"
 
