@@ -8,13 +8,13 @@ formulas into png images.
 ![E=mc^2](https://raw.githubusercontent.com/mneri/pnglatex/master/example.png)
 
 ## Installation
-Download or clone the repository, then type
+Download or clone the repository, then make `pnglatex` an executable and add it to your path, e.g.
 
     # chmod +x pnglatex
     # cp pnglatex /usr/bin/pnglatex
 
 ## Dependencies
-`pnglatex` depends on `dvipng`, `imagemagick`, `latex`, `optipng`, and `xclip` packages.
+`pnglatex` depends on `dvipng`, `imagemagick`, `latex`, and `optipng` packages. Optional dependencies include `xclip` to copy image to clipboard, and `notify-send` to show a preview of the image through a notification.
 
 ## Tips
 You can pipe into `pnglatex`:

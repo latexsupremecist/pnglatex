@@ -160,8 +160,12 @@ function generate {
         xdg-open $PNGFILE
     fi
 
-    cat $PNGFILE | xclip -selection clipboard -target image/png -i
-    notify-send -i $PNGFILE "pnglatex" "Screenshot copied to Clipboard"
+    if exists xclip; then
+        cat $PNGFILE | xclip -selection clipboard -target image/png -i
+        if exists notify-send; then
+            notify-send -i $PNGFILE "pnglatex" "Screenshot copied to Clipboard"
+        fi
+    fi
 
     if [ $SAVE -eq 0 ]; then
 	rm $PNGFILE
@@ -178,8 +182,11 @@ function main {
     fi
 
     if ! exists xclip; then
-        echo "pnglatex requires xclip package." >&2
-        exit 1
+        echo "pnglatex requires xclip package to copy to clipboard." >&2
+    fi
+
+    if ! exists notify-send; then
+        echo "pnglatex requires notify-send package to display png in notification."
     fi
 
     properties
